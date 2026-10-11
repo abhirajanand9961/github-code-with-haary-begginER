@@ -1,0 +1,537 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LearnNova | Your Learning Space</title>
+
+<style>
+/* BASIC SETTINGS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #080b18;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* BACKGROUND GLOW */
+body::before {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: #673cff;
+    filter: blur(180px);
+    opacity: 0.22;
+    top: -150px;
+    left: -150px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: #00d9ff;
+    filter: blur(180px);
+    opacity: 0.13;
+    right: -150px;
+    bottom: -100px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* NAVIGATION */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 8%;
+    background: rgba(8, 11, 24, 0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #a78bfa, #22d3ee);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #22d3ee;
+}
+
+/* HERO SECTION */
+.hero {
+    text-align: center;
+    padding: 100px 20px 70px;
+}
+
+.badge {
+    display: inline-block;
+    border: 1px solid #5141a8;
+    background: rgba(103, 60, 255, 0.12);
+    color: #c4b5fd;
+    border-radius: 30px;
+    padding: 9px 18px;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 7vw, 76px);
+    line-height: 1.12;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #a78bfa, #22d3ee);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: #9ca3b8;
+    max-width: 600px;
+    margin: 24px auto;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.button {
+    display: inline-block;
+    padding: 14px 26px;
+    margin: 10px 5px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #7048ff, #4f9cff);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 35px #7048ff55;
+}
+
+.button-outline {
+    background: transparent;
+    border: 1px solid #343b58;
+}
+
+/* STATISTICS */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    padding: 35px 20px;
+    border-top: 1px solid #20243a;
+    border-bottom: 1px solid #20243a;
+    background: rgba(255,255,255,0.015);
+}
+
+.stat h2 {
+    font-size: 30px;
+    color: #a78bfa;
+    text-align: center;
+}
+
+.stat p {
+    color: #8992a9;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+/* GENERAL SECTIONS */
+section {
+    padding: 80px 8%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+.section-description {
+    text-align: center;
+    color: #8e97ad;
+    margin-bottom: 40px;
+    line-height: 1.7;
+}
+
+/* SEARCH */
+.search-box {
+    max-width: 500px;
+    margin: 0 auto 35px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid #303651;
+    background: #11162a;
+    color: white;
+    outline: none;
+    font-size: 15px;
+}
+
+.search-box input:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 15px #8b5cf633;
+}
+
+/* SUBJECT CARDS */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    background: linear-gradient(145deg, #151a30, #0d1122);
+    border: 1px solid #272d48;
+    border-radius: 20px;
+    padding: 28px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #8063ff;
+    box-shadow: 0 15px 40px #00000044;
+}
+
+.card-icon {
+    font-size: 35px;
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #929bb0;
+    line-height: 1.7;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.card a {
+    color: #a78bfa;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.card a:hover {
+    color: #22d3ee;
+}
+
+/* FEATURE BANNER */
+.banner {
+    background: linear-gradient(120deg, #332078, #133c61);
+    border: 1px solid #6552a8;
+    border-radius: 25px;
+    padding: 45px;
+    text-align: center;
+}
+
+.banner h2 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.banner p {
+    color: #d0d5ed;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 35px 20px;
+    border-top: 1px solid #20243a;
+    color: #79839b;
+    font-size: 13px;
+    line-height: 2;
+}
+
+footer span {
+    color: #a78bfa;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 600px) {
+    nav {
+        padding: 18px 5%;
+    }
+
+    nav a {
+        margin-left: 10px;
+        font-size: 12px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .hero {
+        padding-top: 75px;
+    }
+
+    .stats {
+        gap: 30px;
+    }
+
+    section {
+        padding: 60px 5%;
+    }
+
+    .banner {
+        padding: 30px 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="logo">✦ LearnNova</div>
+
+    <div>
+        <a href="#home">Home</a>
+        <a href="#subjects">Subjects</a>
+        <a href="#about">About</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+
+    <div class="badge">🚀 YOUR JOURNEY STARTS HERE</div>
+
+    <h1>
+        Learn More.<br>
+        <span class="gradient-text">Dream Bigger.</span>
+    </h1>
+
+    <p>
+        Welcome to your personal learning universe.
+        Explore subjects, discover new ideas, and build
+        the skills that will shape your future.
+    </p>
+
+    <a href="#subjects" class="button">Explore Subjects →</a>
+
+    <a href="#about" class="button button-outline">Discover More</a>
+
+</header>
+
+<!-- STATISTICS -->
+<div class="stats">
+
+    <div class="stat">
+        <h2>∞</h2>
+        <p>Possibilities</p>
+    </div>
+
+    <div class="stat">
+        <h2>01</h2>
+        <p>Your Learning Journey</p>
+    </div>
+
+    <div class="stat">
+        <h2>24/7</h2>
+        <p>Explore Anytime</p>
+    </div>
+
+</div>
+
+<!-- SUBJECTS -->
+<section id="subjects">
+
+    <h2 class="section-title">
+        Explore <span class="gradient-text">Subjects</span>
+    </h2>
+
+    <p class="section-description">
+        Find something interesting and start learning today.
+    </p>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="search"
+            placeholder="🔍 Search subjects..."
+            aria-label="Search subjects"
+        >
+    </div>
+
+    <div class="grid" id="subjectGrid">
+
+        <div class="card" data-search="mathematics maths numbers">
+            <div class="card-icon">📐</div>
+            <h3>Mathematics</h3>
+            <p>Explore numbers, equations, geometry, and logical thinking.</p>
+            <a href="https://www.khanacademy.org/math" target="_blank" rel="noopener noreferrer">
+                Start Learning →
+            </a>
+        </div>
+
+        <div class="card" data-search="science physics chemistry biology">
+            <div class="card-icon">🔬</div>
+            <h3>Science</h3>
+            <p>Discover the universe through experiments and scientific ideas.</p>
+            <a href="https://www.khanacademy.org/science" target="_blank" rel="noopener noreferrer">
+                Start Learning →
+            </a>
+        </div>
+
+        <div class="card" data-search="coding programming computer technology">
+            <div class="card-icon">💻</div>
+            <h3>Coding</h3>
+            <p>Learn programming and create your own websites and projects.</p>
+            <a href="https://www.w3schools.com" target="_blank" rel="noopener noreferrer">
+                Start Learning →
+            </a>
+        </div>
+
+        <div class="card" data-search="english grammar writing language">
+            <div class="card-icon">📚</div>
+            <h3>English</h3>
+            <p>Improve grammar, vocabulary, reading, and writing skills.</p>
+            <a href="https://learnenglish.britishcouncil.org" target="_blank" rel="noopener noreferrer">
+                Start Learning →
+            </a>
+        </div>
+
+        <div class="card" data-search="geography history social studies">
+            <div class="card-icon">🌍</div>
+            <h3>Social Studies</h3>
+            <p>Explore history, geography, cultures, and our changing world.</p>
+            <a href="https://www.khanacademy.org/humanities" target="_blank" rel="noopener noreferrer">
+                Start Learning →
+            </a>
+        </div>
+
+        <div class="card" data-search="general knowledge facts quiz">
+            <div class="card-icon">🧠</div>
+            <h3>General Knowledge</h3>
+            <p>Discover interesting facts and expand your knowledge every day.</p>
+            <a href="https://www.britannica.com" target="_blank" rel="noopener noreferrer">
+                Start Learning →
+            </a>
+        </div>
+
+    </div>
+
+    <p id="noResults" style="display:none;text-align:center;color:#9ca3b8;margin-top:25px;">
+        No subjects found. Try another search!
+    </p>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+
+    <div class="banner">
+
+        <h2>✨ Your Future Starts With Learning</h2>
+
+        <p>
+            Every expert was once a beginner.
+            Keep exploring, stay curious, and never stop growing.
+        </p>
+
+        <a href="#subjects" class="button">Start Exploring →</a>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>Made with <span>♥</span> and curiosity.</p>
+    <p>© <span id="year"></span> LearnNova. Keep Learning. Keep Growing.</p>
+</footer>
+
+<script>
+// SUBJECT SEARCH
+const searchInput = document.getElementById("search");
+const cards = document.querySelectorAll(".card");
+const noResults = document.getElementById("noResults");
+
+searchInput.addEventListener("input", function () {
+
+    const query = this.value.toLowerCase().trim();
+    let visibleCards = 0;
+
+    cards.forEach(function (card) {
+
+        const searchableText =
+            card.innerText.toLowerCase() + " " +
+            card.dataset.search.toLowerCase();
+
+        const matches = searchableText.includes(query);
+
+        card.style.display = matches ? "block" : "none";
+
+        if (matches) {
+            visibleCards++;
+        }
+
+    });
+
+    noResults.style.display =
+        visibleCards === 0 ? "block" : "none";
+
+});
+
+// AUTOMATIC COPYRIGHT YEAR
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+</script>
+
+</body>
+</html>
+```
